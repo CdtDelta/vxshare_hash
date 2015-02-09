@@ -12,6 +12,14 @@ from configobj import ConfigObj
 import requests
 import os
 
+def reconfig_hash_file(hash_file):
+    with open(hash_file, "r") as hash_file_to_process:
+        new_hash_file = hash_file_to_process.readlines()
+        bkup_hash_file = new_hash_file[6:]    
+    with open(hash_file, "w") as new_hash_file:
+        bkup_hash_file.insert(0, "MD5\n")
+        new_hash_file.writelines(bkup_hash_file)
+
 config_file = "/home/tom/tom@yarrish.com/Python/Projects/vx_share.cfg"
 
 if os.path.exists(config_file):
@@ -41,6 +49,7 @@ try:
             with open(vxshare_file_name, "w") as hash_file:
                 print "Downloading {}...\n".format(vxshare_file_name)
                 hash_file.write(vxshare_requests.content)
+                reconfig_hash_file(vxshare_file_name)
         else:
             file_is_valid = False
             config['last_vxshare_num'] = vxshare_no

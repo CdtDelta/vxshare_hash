@@ -5,8 +5,7 @@
 #
 # Modules required: requests, configobj
 #
-# Todo:
-# - Add code to strip out first six lines of each file and replace with MD5 (for import in X-Ways Forensic)
+
 
 from configobj import ConfigObj
 import requests
@@ -20,7 +19,7 @@ def reconfig_hash_file(hash_file):
         bkup_hash_file.insert(0, "MD5\n")
         new_hash_file.writelines(bkup_hash_file)
 
-config_file = "/home/tom/tom@yarrish.com/Python/Projects/vx_share.cfg"
+config_file = sys.argv[1]
 
 if os.path.exists(config_file):
     print "File exists"

@@ -1,15 +1,17 @@
 # This script is for pulling new hash files from vxshare.com
 #
-# Version 1.0
+# Version 1.1
 # By Tom Yarrish
 #
 # Modules required: requests, configobj
 #
+# 3/21/15 - Added import sys which apparently disappeared when I was working on the code
 
 
 from configobj import ConfigObj
 import requests
 import os
+import sys
 
 def reconfig_hash_file(hash_file):
     with open(hash_file, "r") as hash_file_to_process:
